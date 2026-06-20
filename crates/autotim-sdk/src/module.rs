@@ -73,12 +73,30 @@ pub struct HealthReport {
     pub detail: Option<String>,
 }
 
-/// A database migration owned by a module. Forward + rollback are both
-/// required (doc 14, doc 60). The actual SQL/runner type is defined in
-/// `autotim-kernel`; this is a placeholder signature for the SDK contract.
+/// A database migration owned by a module (doc 14, doc 60).
+///
+/// Both `up` and `down` SQL are required: every schema change ships a
+/// forward and a rollback (doc 60 §"Database Migrations"). The kernel's
+/// migration runner — not this type — computes the checksum stored in
+/// `module_migrations` (doc 14) and decides apply/skip; the checksum is
+/// deliberately not a field here so it cannot be hand-forged in a module.
+///
+/// `up`/`down` are `&'static str` because migration SQL is embedded into
+/// the binary at compile time (typically via `include_str!` of the
+/// `.sql` files under `migrations/<module>/`). This keeps the single-
+/// binary packaging (doc 10) intact — no migration files are read from
+/// disk at runtime — while the SQL itself stays in reviewable `.sql`
+/// files rather than inline Rust string literals.
+///
+/// `version` orders migrations within a module and is the identity
+/// tracked in `module_migrations`; it must be stable and unique per
+/// module (e.g. `"0001"`). It is the module-local version, not the
+/// platform SemVer (doc 60).
 pub struct Migration {
     pub version: &'static str,
     pub description: &'static str,
+    pub up: &'static str,
+    pub down: &'static str,
 }
 
 /// Frontend manifest mirror of the backend module (doc 50). Concrete
