@@ -237,6 +237,7 @@ dependencies = [
  "async-trait",
  "autotim-sdk",
  "serde",
+ "sqlx",
  "thiserror",
  "tokio",
  "tracing",
