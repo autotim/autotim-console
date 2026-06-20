@@ -30,8 +30,12 @@ pub struct CertHandle {
 #[derive(Debug, Clone)]
 pub enum CertStatus {
     Pending,
-    Issued { expires_at: chrono::DateTime<chrono::Utc> },
-    Failed { reason: String },
+    Issued {
+        expires_at: chrono::DateTime<chrono::Utc>,
+    },
+    Failed {
+        reason: String,
+    },
     Revoked,
 }
 

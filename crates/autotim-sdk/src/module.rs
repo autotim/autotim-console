@@ -10,7 +10,9 @@ use async_trait::async_trait;
 use axum::Router;
 use std::sync::Arc;
 
-use crate::ports::{AuditSink, Authorizer, EventBus, JobQueue, Notifier, SecretStore, SettingsStore};
+use crate::ports::{
+    AuditSink, Authorizer, EventBus, JobQueue, Notifier, SecretStore, SettingsStore,
+};
 
 /// Architectural layer a module belongs to. Validated against the
 /// dependency law at boot (doc 00): Core → Core, Infra → Core,

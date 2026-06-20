@@ -136,7 +136,8 @@ impl BootstrapConfig {
             problems.push("database.url is empty".to_string());
         }
         if contains_placeholder(&self.database.url) {
-            problems.push("database.url still contains an unedited template placeholder".to_string());
+            problems
+                .push("database.url still contains an unedited template placeholder".to_string());
         }
 
         const KNOWN_KEY_PROVIDERS: &[&str] = &["passphrase", "os-keystore", "kms"];
@@ -161,11 +162,19 @@ impl BootstrapConfig {
                 );
             }
             for (label, value) in [
-                ("server.tls_cert", self.server.tls_cert.as_deref().unwrap_or("")),
-                ("server.tls_key", self.server.tls_key.as_deref().unwrap_or("")),
+                (
+                    "server.tls_cert",
+                    self.server.tls_cert.as_deref().unwrap_or(""),
+                ),
+                (
+                    "server.tls_key",
+                    self.server.tls_key.as_deref().unwrap_or(""),
+                ),
             ] {
                 if contains_placeholder(value) {
-                    problems.push(format!("{label} still contains an unedited template placeholder"));
+                    problems.push(format!(
+                        "{label} still contains an unedited template placeholder"
+                    ));
                 }
             }
         }
@@ -182,7 +191,8 @@ fn read_toml(path: &Path) -> Result<toml::Value, ConfigError> {
     if !path.exists() {
         return Err(ConfigError::NotFound(path.to_path_buf()));
     }
-    let text = std::fs::read_to_string(path).map_err(|e| ConfigError::Read(path.to_path_buf(), e))?;
+    let text =
+        std::fs::read_to_string(path).map_err(|e| ConfigError::Read(path.to_path_buf(), e))?;
     toml::from_str(&text).map_err(|e| ConfigError::Parse(path.to_path_buf(), e))
 }
 
@@ -219,7 +229,11 @@ fn apply_env_overrides(value: &mut toml::Value) {
         let Some(rest) = env_key.strip_prefix("AUTOTIM_") else {
             continue;
         };
-        let path: Vec<String> = rest.to_lowercase().split("__").map(str::to_string).collect();
+        let path: Vec<String> = rest
+            .to_lowercase()
+            .split("__")
+            .map(str::to_string)
+            .collect();
         set_path(value, &path, env_val);
     }
 }

@@ -13,4 +13,7 @@
 pub mod provider;
 pub mod providers;
 
-pub use provider::{ChannelCapabilities, ChannelRecipient, DeliveryReceipt, NotificationChannelProvider, RenderedNotification};
+pub use provider::{
+    ChannelCapabilities, ChannelRecipient, DeliveryReceipt, NotificationChannelProvider,
+    RenderedNotification,
+};

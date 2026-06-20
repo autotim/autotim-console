@@ -36,7 +36,9 @@ pub enum KernelError {
 
 impl Kernel {
     pub fn new() -> Self {
-        Self { modules: Vec::new() }
+        Self {
+            modules: Vec::new(),
+        }
     }
 
     pub fn register(&mut self, module: Box<dyn Module>) -> &mut Self {

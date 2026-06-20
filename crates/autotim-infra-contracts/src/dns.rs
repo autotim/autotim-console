@@ -34,7 +34,12 @@ pub trait DnsProvider: Send + Sync {
     /// Used for ACME DNS-01 challenges. See doc 00 (Infrastructure →
     /// Infrastructure dependency rule) and doc 42 §9 for how SSL and DNS
     /// coordinate this without a hidden coupling.
-    async fn create_txt_challenge(&self, zone: &str, name: &str, value: &str) -> Result<(), ProviderError>;
+    async fn create_txt_challenge(
+        &self,
+        zone: &str,
+        name: &str,
+        value: &str,
+    ) -> Result<(), ProviderError>;
     async fn remove_txt_challenge(&self, zone: &str, name: &str) -> Result<(), ProviderError>;
 
     async fn health(&self) -> ProviderHealth;

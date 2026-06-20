@@ -27,7 +27,10 @@ pub struct DashboardHandle {
 pub trait DashboardProvider: Send + Sync {
     fn capabilities(&self) -> DashboardProviderCapabilities;
 
-    async fn provision_dashboard(&self, dashboard: &DashboardDef) -> Result<DashboardHandle, ProviderError>;
+    async fn provision_dashboard(
+        &self,
+        dashboard: &DashboardDef,
+    ) -> Result<DashboardHandle, ProviderError>;
     async fn delete_dashboard(&self, id: &str) -> Result<(), ProviderError>;
     async fn dashboard_url(&self, id: &str) -> Result<String, ProviderError>;
 

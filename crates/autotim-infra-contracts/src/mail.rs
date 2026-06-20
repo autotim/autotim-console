@@ -20,7 +20,8 @@ pub trait MailProvider: Send + Sync {
     fn capabilities(&self) -> MailProviderCapabilities;
 
     async fn create_domain(&self, domain: &str) -> Result<(), ProviderError>;
-    async fn create_mailbox(&self, domain: &str, mailbox: &MailboxDef) -> Result<(), ProviderError>;
+    async fn create_mailbox(&self, domain: &str, mailbox: &MailboxDef)
+        -> Result<(), ProviderError>;
     async fn delete_mailbox(&self, domain: &str, mailbox: &str) -> Result<(), ProviderError>;
 
     async fn health(&self) -> ProviderHealth;

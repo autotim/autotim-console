@@ -16,5 +16,5 @@ pub mod ports;
 pub mod types;
 
 pub use error::{ProviderError, ProviderHealth, SdkError, SdkResult};
-pub use module::{HealthReport, HealthStatus, Module, ModuleContext, ModuleManifest, Layer};
+pub use module::{HealthReport, HealthStatus, Layer, Module, ModuleContext, ModuleManifest};
 pub use types::{OrganizationId, Permission, Scope, UserId};
