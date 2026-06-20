@@ -91,21 +91,28 @@ pub trait Notifier: Send + Sync {
     ) -> SdkResult<()>;
 }
 
+/// A single audit record. See doc 24 — Audit, §"Event Structure".
+///
+/// Field shape mirrors the `audit_events` table directly; the sink
+/// implementation owns hash-chaining (`prev_hash`/`hash`) and
+/// partition placement, neither of which the caller should construct.
+#[derive(Debug, Clone, serde::Serialize, serde::Deserialize)]
+pub struct AuditEntry {
+    pub organization_id: OrganizationId,
+    pub actor: UserId,
+    pub action: String,
+    pub target_type: String,
+    pub target_id: Option<Uuid>,
+    pub result: String,
+    pub correlation_id: Uuid,
+    pub metadata: Value,
+}
+
 /// Tamper-evident audit sink. See doc 24 — Audit.
 #[async_trait]
 pub trait AuditSink: Send + Sync {
-    async fn record(
-        &self,
-        org: OrganizationId,
-        actor: UserId,
-        action: &str,
-        target_type: &str,
-        target_id: Option<Uuid>,
-        result: &str,
-        metadata: Value,
-    ) -> SdkResult<()>;
+    async fn record(&self, entry: AuditEntry) -> SdkResult<()>;
 }
-
 /// Schema-driven settings access, scoped global/module/user (doc 13, doc 23
 /// "Settings store references, never values").
 #[async_trait]
