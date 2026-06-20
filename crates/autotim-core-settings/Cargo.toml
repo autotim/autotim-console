@@ -1,0 +1,15 @@
+[package]
+name = "autotim-core-settings"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "Core: schema-driven settings store (referenced in docs 13, 23, 42)"
+
+[dependencies]
+autotim-sdk = { path = "../autotim-sdk" }
+tokio.workspace = true
+serde.workspace = true
+async-trait.workspace = true
+thiserror.workspace = true
+tracing.workspace = true

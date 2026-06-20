@@ -1,0 +1,16 @@
+[package]
+name = "autotim-core-notifications"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "Core: notification delivery — channels as Integration Providers (Email, In-App, Webhook, Telegram, Discord, Matrix, Push), templates, user preferences, security-notification priority (doc 32). Built on the job queue from autotim-core-async (doc 31)."
+
+[dependencies]
+autotim-sdk = { path = "../autotim-sdk" }
+tokio.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+async-trait.workspace = true
+thiserror.workspace = true
+tracing.workspace = true

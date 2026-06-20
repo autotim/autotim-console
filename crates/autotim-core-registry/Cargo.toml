@@ -1,0 +1,15 @@
+[package]
+name = "autotim-core-registry"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "Core: module registry, manifest validation, dependency law enforcement (doc 13)"
+
+[dependencies]
+autotim-sdk = { path = "../autotim-sdk" }
+tokio.workspace = true
+serde.workspace = true
+async-trait.workspace = true
+thiserror.workspace = true
+tracing.workspace = true

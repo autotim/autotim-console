@@ -1,0 +1,15 @@
+[package]
+name = "autotim-infra-ssl"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "Infrastructure: SSL/certificate module + CertificateProvider adapters (docs 00, 42)"
+
+[dependencies]
+autotim-sdk = { path = "../autotim-sdk" }
+tokio.workspace = true
+serde.workspace = true
+async-trait.workspace = true
+thiserror.workspace = true
+tracing.workspace = true

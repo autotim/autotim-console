@@ -1,0 +1,15 @@
+[package]
+name = "autotim-core-agent"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "Core: agent registration, gRPC gateway, command dispatch (doc 41)"
+
+[dependencies]
+autotim-sdk = { path = "../autotim-sdk" }
+tokio.workspace = true
+serde.workspace = true
+async-trait.workspace = true
+thiserror.workspace = true
+tracing.workspace = true

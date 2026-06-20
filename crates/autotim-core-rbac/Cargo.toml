@@ -1,0 +1,15 @@
+[package]
+name = "autotim-core-rbac"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "Core: RBAC with scoped grants, permission registry, decision cache (doc 21)"
+
+[dependencies]
+autotim-sdk = { path = "../autotim-sdk" }
+tokio.workspace = true
+serde.workspace = true
+async-trait.workspace = true
+thiserror.workspace = true
+tracing.workspace = true
