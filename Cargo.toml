@@ -1,0 +1,55 @@
+[workspace]
+resolver = "2"
+members = [
+    "crates/autotim-sdk",
+    "crates/autotim-kernel",
+    "crates/autotim-core-tenancy",
+    "crates/autotim-core-registry",
+    "crates/autotim-core-settings",
+    "crates/autotim-core-audit",
+    "crates/autotim-core-rbac",
+    "crates/autotim-core-auth",
+    "crates/autotim-core-security",
+    "crates/autotim-core-secrets",
+    "crates/autotim-core-async",
+    "crates/autotim-core-notifications",
+    "crates/autotim-core-hosts",
+    "crates/autotim-core-agent",
+    "crates/autotim-infra-contracts",
+    "crates/autotim-infra-dns",
+    "crates/autotim-infra-ssl",
+    "crates/autotim-infra-mail",
+    "crates/autotim-infra-monitoring",
+    "crates/autotim-infra-backup",
+    "crates/autotim-infra-network",
+    "crates/autotim",
+]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+license = "AGPL-3.0-only"
+repository = "https://github.com/autotim/autotim-console"
+authors = ["Autotim Contributors"]
+
+[workspace.dependencies]
+tokio = { version = "1", features = ["full"] }
+axum = { version = "0.7", features = ["macros"] }
+sqlx = { version = "0.7", features = ["runtime-tokio", "postgres", "uuid", "chrono", "json"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+uuid = { version = "1", features = ["v7", "serde"] }
+chrono = { version = "0.4", features = ["serde"] }
+async-trait = "0.1"
+thiserror = "1"
+anyhow = "1"
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter", "json"] }
+rust-embed = "8"
+toml = "0.8"
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
+strip = true
