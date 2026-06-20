@@ -1,0 +1,25 @@
+# Copy to /etc/systemd/system/autotim.service and adjust the user/paths
+# if your deployment differs. Real environment values belong in
+# /etc/autotim/autotim.env (gitignored, created from
+# deploy/systemd/autotim.env.example) — never inline here.
+
+[Unit]
+Description=Autotim Console
+After=network.target postgresql.service
+
+[Service]
+Type=simple
+User=autotim
+Group=autotim
+ExecStart=/usr/local/bin/autotim
+EnvironmentFile=/etc/autotim/autotim.env
+Environment=AUTOTIM_CONFIG=/etc/autotim/config.toml
+Restart=on-failure
+RestartSec=5
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/autotim /var/log/autotim
+
+[Install]
+WantedBy=multi-user.target

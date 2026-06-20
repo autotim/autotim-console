@@ -1,0 +1,35 @@
+# Optional first-boot seed for Integration Provider SELECTION (doc 42).
+#
+# This file never carries credentials. A provider's credentials are
+# always a Secrets reference (doc 23), configured through the Settings
+# UI/API after boot — never inline here, and never committed to Git.
+#
+# Copy to config/providers.toml (gitignored) only if you want providers
+# pre-selected on first boot instead of choosing them later in the
+# Settings UI. Loading this file is just a batch of Settings `set()`
+# calls through the same validated import path doc 30 already defines
+# ("Import & Export") — it is not a second configuration system, and
+# it is entirely optional.
+
+[dns]
+provider = "powerdns"          # powerdns | route53 | cloudflare
+
+[ssl]
+provider = "autotim-acme"      # autotim-acme | step-ca
+
+[monitoring]
+provider = "prometheus"
+
+[mail]
+provider = "stalwart"
+
+[ingress]
+provider = "traefik"
+
+[network]
+provider = "wireguard"         # netbird | tailscale | headscale | wireguard | openvpn | zerotier
+
+# After boot, configure each provider's connection details and
+# credentials via Settings → Infrastructure → <module> → Provider.
+# Real hostnames, API URLs, and tokens belong there — never in a file
+# under version control.

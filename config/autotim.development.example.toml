@@ -1,0 +1,20 @@
+# Local development overlay (optional pattern — see autotim.example.toml).
+# Copy to config/autotim.development.toml (gitignored) if you keep
+# config/autotim.toml as a shared base across environments. If you
+# instead edit config/autotim.toml directly for local dev, you do not
+# need this file at all.
+
+environment = "development"
+
+[server]
+bind = "127.0.0.1:8080"
+
+[database]
+url = "postgres://autotim:autotim@localhost:5432/autotim_dev"
+
+[secrets]
+key_provider = "passphrase"
+
+[logging]
+level = "debug"
+format = "pretty"

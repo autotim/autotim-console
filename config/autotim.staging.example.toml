@@ -1,0 +1,21 @@
+# Staging overlay template. Real staging values live in
+# /etc/autotim/config.staging.toml on the staging host, or in the
+# private deployment repository — never in this public repository.
+# See docs/security/public-private-boundary.md.
+
+environment = "staging"
+
+[server]
+bind = "0.0.0.0:8080"
+tls_cert = "/etc/autotim/tls/fullchain.pem"
+tls_key  = "/etc/autotim/tls/privkey.pem"
+
+[database]
+url = "REPLACE_WITH_STAGING_DATABASE_URL"
+
+[secrets]
+key_provider = "passphrase"
+
+[logging]
+level = "info"
+format = "json"

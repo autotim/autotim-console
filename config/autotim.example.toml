@@ -1,0 +1,53 @@
+# Autotim Console — bootstrap configuration template.
+#
+# Copy this file to one of:
+#   /etc/autotim/config.toml          (production / staging, bare-metal)
+#   config/autotim.toml                (local development, gitignored)
+# Never commit the copied file — see docs/security/public-private-boundary.md.
+#
+# This file is intentionally minimal: it only carries what the kernel
+# needs BEFORE a database connection exists (doc 11, "Two Kinds of
+# Configuration"). Everything else — provider credentials, OIDC issuer
+# URLs, notification channels — lives in Settings after boot (doc 30).
+#
+# Every value below is a placeholder. The startup validator
+# (autotim-kernel::config) refuses to boot a "production" environment
+# while a CHANGE_ME / REPLACE_WITH placeholder survives in a
+# security-relevant field.
+#
+# Two ways to use this file:
+#   1. Edit it directly, in place, per deployment (simplest — fine for
+#      a single self-hosted instance).
+#   2. Keep it as a shared base and add an overlay file named
+#      "<this file's stem>.<environment>.toml" in the same directory
+#      (e.g. autotim.production.toml) — see
+#      config/autotim.production.example.toml for that pattern.
+# Either way, environment variables (AUTOTIM_SECTION__KEY) always win
+# over both files — see the boundary document for the precedence order.
+
+environment = "development"   # development | staging | production
+
+[server]
+bind = "127.0.0.1:8080"
+# TLS is required in staging/production (doc 20 — "TLS required; HSTS
+# on"). Either terminate it here with a cert/key pair, or terminate it
+# at a reverse proxy you control and set both paths anyway so the
+# validator knows TLS is handled.
+# tls_cert = "/etc/autotim/tls/fullchain.pem"
+# tls_key  = "/etc/autotim/tls/privkey.pem"
+
+[database]
+# postgres://<user>:<password>@<host>:<port>/<database>
+url = "postgres://autotim:CHANGE_ME@localhost:5432/autotim"
+
+[secrets]
+# passphrase | os-keystore | kms  (doc 23)
+key_provider = "passphrase"
+# Unseal material is NEVER stored in this file, in any environment.
+# Provide it via the AUTOTIM_SECRETS__PASSPHRASE environment variable
+# (systemd EnvironmentFile, see deploy/systemd/) or the configured
+# KMS's own authentication mechanism.
+
+[logging]
+level = "info"      # trace | debug | info | warn | error
+format = "json"      # json | pretty

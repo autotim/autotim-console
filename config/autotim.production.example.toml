@@ -1,0 +1,29 @@
+# Production overlay template. Real production values NEVER live in
+# this repository, under any filename. See
+# docs/security/public-private-boundary.md for where they actually
+# live (/etc/autotim/, systemd EnvironmentFile, or the private
+# deployment repo).
+#
+# Every CHANGE_ME / REPLACE_WITH placeholder below is checked at
+# startup by the kernel's config validator (autotim-kernel::config);
+# the platform refuses to boot in the "production" environment while
+# any of them survive unedited.
+
+environment = "production"
+
+[server]
+bind = "0.0.0.0:8443"
+tls_cert = "/etc/autotim/tls/fullchain.pem"
+tls_key  = "/etc/autotim/tls/privkey.pem"
+
+[database]
+url = "REPLACE_WITH_PRODUCTION_DATABASE_URL"
+
+[secrets]
+key_provider = "kms"   # passphrase is also a valid production choice
+                        # (doc 23); kms is shown as the recommended
+                        # default for production self-hosted/enterprise.
+
+[logging]
+level = "warn"
+format = "json"
