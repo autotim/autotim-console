@@ -1,0 +1,53 @@
+# Rust
+/target
+**/*.rs.bk
+Cargo.lock.orig
+
+# SQLx offline cache (commit .sqlx/ once real queries exist; ignore the tmp form)
+/.sqlx-tmp
+
+# Node / frontend
+frontend/node_modules
+frontend/.vite
+# Note: frontend/dist holds a committed placeholder index.html on a clean
+# checkout so the binary compiles. Real builds overwrite it locally; CI
+# rebuilds it. Do not commit real build artifacts.
+frontend/dist/assets
+frontend/dist/*.js
+frontend/dist/*.css
+
+# Configuration — only .example.toml templates are tracked. Real
+# config files are created locally from these templates and must
+# never be committed. See docs/security/public-private-boundary.md.
+config/*.toml
+!config/*.example.toml
+
+# Deployment files created from deploy/**/*.example templates.
+# Real systemd units/env files are never tracked; only the .example
+# templates are.
+deploy/**/*.env
+deploy/**/*.service
+
+# Secrets — never commit, regardless of location or extension.
+*.pem
+*.key
+*.crt
+*.csr
+secrets.toml
+secrets/
+.env
+.env.*
+
+# Local/private deployment artifacts (Ansible-style inventories, ad
+# hoc local overrides).
+*.local.toml
+inventory.ini
+inventory.yml
+hosts.local
+deploy.local/
+
+# Editor / OS
+.idea/
+.vscode/
+.DS_Store
+*.swp

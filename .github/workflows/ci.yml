@@ -1,0 +1,41 @@
+# CI gates per docs/architecture/62-development-workflow.md.
+# Scaffold: jobs are wired but intentionally lightweight until the first
+# real code lands. Expand (cargo audit/deny, permission linter, architecture
+# check, frontend type-check) as those tools are added.
+name: ci
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+
+jobs:
+  backend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt, clippy
+      - name: Format
+        run: cargo fmt --all -- --check
+      - name: Clippy
+        run: cargo clippy --workspace --all-targets -- -D warnings
+      - name: Build
+        run: cargo build --workspace
+      - name: Test
+        run: cargo test --workspace
+
+  frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Install
+        working-directory: frontend
+        run: npm install
+      - name: Type-check
+        working-directory: frontend
+        run: npm run type-check
