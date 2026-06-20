@@ -1,0 +1,17 @@
+[package]
+name = "autotim-kernel"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "Runtime kernel: bootstrap config loading + startup validation (docs 11, security/public-private-boundary), module registry bootstrap, dependency-law validation, port wiring (docs 00, 10, 13)."
+
+[dependencies]
+autotim-sdk = { path = "../autotim-sdk" }
+tokio.workspace = true
+sqlx.workspace = true
+serde.workspace = true
+toml.workspace = true
+tracing.workspace = true
+thiserror.workspace = true
+anyhow.workspace = true
