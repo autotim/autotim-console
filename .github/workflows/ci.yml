@@ -1,7 +1,7 @@
 # CI gates per docs/architecture/62-development-workflow.md.
 # Scaffold: jobs are wired but intentionally lightweight until the first
-# real code lands. Expand (cargo audit/deny, permission linter, architecture
-# check, frontend type-check) as those tools are added.
+# real code lands. Expand (cargo audit/deny, permission linter, frontend
+# type-check already present) as those tools are added.
 name: ci
 
 on:
@@ -25,6 +25,13 @@ jobs:
         run: cargo build --workspace
       - name: Test
         run: cargo test --workspace
+
+  architecture-compliance:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Tenant-column presence check
+        run: bash scripts/check-tenant-columns.sh
 
   frontend:
     runs-on: ubuntu-latest
