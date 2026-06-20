@@ -1,0 +1,14 @@
+[package]
+name = "autotim-infra-contracts"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "Shared Integration Provider contracts: DnsProvider, CertificateProvider, MonitoringProvider, DashboardProvider, MailProvider, IngressProvider, OverlayNetworkProvider (doc 42)."
+
+[dependencies]
+autotim-sdk = { path = "../autotim-sdk" }
+async-trait.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+chrono.workspace = true
