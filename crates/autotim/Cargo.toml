@@ -1,0 +1,29 @@
+[package]
+name = "autotim-bin"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "Autotim Console — Community Edition binary (doc 10)."
+
+[[bin]]
+name = "autotim"
+path = "src/main.rs"
+
+[dependencies]
+autotim-sdk = { path = "../autotim-sdk" }
+autotim-kernel = { path = "../autotim-kernel" }
+tokio.workspace = true
+axum.workspace = true
+tracing.workspace = true
+tracing-subscriber.workspace = true
+rust-embed.workspace = true
+anyhow.workspace = true
+
+# Community Infrastructure modules (doc 00, 10):
+autotim-infra-dns = { path = "../autotim-infra-dns" }
+autotim-infra-ssl = { path = "../autotim-infra-ssl" }
+autotim-infra-mail = { path = "../autotim-infra-mail" }
+autotim-infra-monitoring = { path = "../autotim-infra-monitoring" }
+autotim-infra-backup = { path = "../autotim-infra-backup" }
+autotim-infra-network = { path = "../autotim-infra-network" }
