@@ -1,0 +1,10 @@
+{
+  "name": "Autotim Console",
+  "short_name": "Autotim",
+  "description": "Self-hosted infrastructure management platform.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#0f172a",
+  "icons": []
+}
