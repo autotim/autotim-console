@@ -19,6 +19,7 @@ use std::path::PathBuf;
 
 #[derive(RustEmbed)]
 #[folder = "../../frontend/dist"]
+#[allow(dead_code)] // not yet wired into routes — see doc 10 §"Single-Binary Packaging"
 struct WebAssets;
 
 #[tokio::main]
