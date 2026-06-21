@@ -16,7 +16,8 @@ tracing.workspace = true
 uuid.workspace = true
 
 [dev-dependencies]
-# Used only by the #[ignore]'d RLS integration test below — not part
-# of this crate's public API. A real PgPool wired into the kernel's
-# request pipeline (doc 11 boot step 2) is a separate, later commit.
+# Used only by the #[ignore]'d RLS integration test — not part of this
+# crate's public API. The Module impl declares migrations as embedded
+# &'static str SQL; it does not execute SQL itself (the kernel migration
+# runner does), so sqlx is not a runtime dependency here.
 sqlx.workspace = true

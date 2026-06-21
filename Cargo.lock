@@ -322,11 +322,13 @@ dependencies = [
  "async-trait",
  "autotim-sdk",
  "serde",
+ "sha2",
  "sqlx",
  "thiserror 1.0.69",
  "tokio",
  "toml",
  "tracing",
+ "uuid",
 ]
 
 [[package]]
