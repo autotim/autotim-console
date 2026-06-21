@@ -21,3 +21,14 @@ pub use module::{
     ModuleManifest,
 };
 pub use types::{OrganizationId, Permission, Scope, UserId};
+
+/// The version of this SDK, as the single source of truth for the
+/// module compatibility contract (doc 60). A module declares the
+/// `sdk_version` it was built against in its `ModuleManifest`; the
+/// kernel compares that declaration against this value at boot and
+/// refuses to start an incompatible module.
+///
+/// This is the SDK crate's own package version (workspace-shared,
+/// doc 10/60), exposed so the kernel reads the SDK's version from the
+/// SDK rather than assuming its own version matches.
+pub const VERSION: &str = env!("CARGO_PKG_VERSION");
